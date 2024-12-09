@@ -1,6 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
+export const designFont = {
+  styleFont: "HeriofLightRegular",
+};
+
 export const GlobalStyled = createGlobalStyle`
 ${reset}
 
@@ -15,6 +19,7 @@ img{
 
     a{
         text-decoration:none;
+        display:block;
     }
 
 
