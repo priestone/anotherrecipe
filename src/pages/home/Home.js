@@ -94,7 +94,11 @@ const Home = () => {
       <Pan2>
         <Link to={"/characterguide"}>
           <img src={Pan2IMG} alt="후라이팬이미지2" />
-          <h2>캐릭터계급도</h2>
+          <h2>
+            캐릭터
+            <br></br>
+            계급도
+          </h2>
         </Link>
       </Pan2>
 

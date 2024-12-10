@@ -18,7 +18,7 @@ const Router = () => {
           element={<Characterguide></Characterguide>}
         ></Route>
         <Route path="/list" element={<List></List>}></Route>
-        <Route path="/detail" element={<Detail></Detail>}></Route>
+        <Route path="/detail/:id" element={<Detail></Detail>}></Route>
       </Routes>
     </HashRouter>
   );

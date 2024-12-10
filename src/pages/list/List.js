@@ -7,6 +7,7 @@ import foodIMG2 from "./imgs/foodIMG2.png";
 import foodIMG3 from "./imgs/foodIMG3.png";
 import foodIMG4 from "./imgs/foodIMG4.png";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Container = styled.div`
   max-width: 440px;
@@ -72,6 +73,7 @@ const Conimg = styled.div`
 `;
 
 const List = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const recipes = [
     {
       id: 1,
@@ -95,27 +97,60 @@ const List = () => {
     },
   ];
 
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value); // 검색어 상태 업데이트
+  };
+
   return (
     <Container>
       <Header></Header>
-      <FormWrap>
-        <Search placeholder="요리 키워드를 입력해주세요"></Search>
+      <FormWrap onSubmit={(e) => e.preventDefault()}>
+        <Search
+          placeholder="요리 키워드를 입력해주세요"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        ></Search>
         <SearchBtn>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </SearchBtn>
       </FormWrap>
       <ConWrap>
-        {recipes.map((recipe) => (
-          <Link to={"/detail"} key={recipe.id}>
-            <Con>
-              <Conimg foodIMG={recipe.img} />
-              <h2>{recipe.name}</h2>
-            </Con>
-          </Link>
-        ))}
+        {filteredRecipes.length > 0 ? (
+          filteredRecipes.map((recipe) => (
+            <Link to={`/detail/${recipe.id}`} key={recipe.id}>
+              <Con>
+                <Conimg foodIMG={recipe.img} />
+                <h2>{recipe.name}</h2>
+              </Con>
+            </Link>
+          ))
+        ) : (
+          <h2
+            style={{
+              color: "white",
+              textAlign: "center",
+              gridColumn: "span 2",
+            }}
+          >
+            검색 결과가 없습니다.
+          </h2>
+        )}
       </ConWrap>
     </Container>
   );
 };
 
 export default List;
+
+// {recipes.map((recipe) => (
+//   <Link to={`/detail/${recipe.id}`} key={recipe.id}>
+//     <Con>
+//       <Conimg foodIMG={recipe.img} />
+//       <h2>{recipe.name}</h2>
+//     </Con>
+//   </Link>
+// ))}

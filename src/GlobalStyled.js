@@ -12,6 +12,11 @@ ${reset}
     box-sizing:border-box;
 }
 
+body{
+    word-break:keep-all;
+    letter-spacing: 1px;
+}
+
 img{
         width:100%;
         display:block;
