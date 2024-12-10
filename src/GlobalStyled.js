@@ -20,6 +20,7 @@ img{
     a{
         text-decoration:none;
         display:block;
+        color:white;
     }
 
 
