@@ -6,13 +6,14 @@ import foodIMG1 from "./imgs/foodIMG1.png";
 import foodIMG2 from "./imgs/foodIMG2.png";
 import foodIMG3 from "./imgs/foodIMG3.png";
 import foodIMG4 from "./imgs/foodIMG4.png";
+import foodIMG5 from "./imgs/foodIMG5.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Container = styled.div`
   max-width: 440px;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 20px;
   margin: 0 auto;
   background: linear-gradient(
@@ -44,21 +45,28 @@ const SearchBtn = styled.button`
 
 const ConWrap = styled.div`
   width: 100%;
-  height: 600px;
+  /* height: 600px; */
   margin-top: 60px;
   /* background-color: salmon; */
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 30px;
+  column-gap: 14px;
+  /* gap: 10px; */
 `;
 
 const Con = styled.div`
   /* background-color: lightblue; */
+
+  h1 {
+    margin-top: 15px;
+    font-weight: 700;
+  }
   h2 {
     margin-top: 7px;
     color: white;
     font-weight: 400;
+    opacity: 0.8;
   }
 `;
 
@@ -77,23 +85,33 @@ const List = () => {
   const recipes = [
     {
       id: 1,
-      name: "[쾌걸근육맨]-갈비찜덮밥",
+      name: "[쾌걸근육맨]",
+      menu: "갈비찜덮밥",
       img: foodIMG1,
     },
     {
       id: 2,
-      name: "[하울의 움직이는성]-하울 정식",
+      name: "[하울의 움직이는성]",
+      menu: "하울 정식",
       img: foodIMG2,
     },
     {
       id: 3,
-      name: "[요리왕 비룡]-황금 볶음밥",
+      name: "[요리왕 비룡]",
+      menu: "황금 볶음밥",
       img: foodIMG3,
     },
     {
       id: 4,
-      name: "[텔레토비]-스마일 쿠키",
+      name: "[텔레토비]",
+      menu: "스마일 쿠키",
       img: foodIMG4,
+    },
+    {
+      id: 5,
+      name: "[심슨]",
+      menu: "슈가글레이즈 도넛",
+      img: foodIMG5,
     },
   ];
 
@@ -124,7 +142,8 @@ const List = () => {
             <Link to={`/detail/${recipe.id}`} key={recipe.id}>
               <Con>
                 <Conimg foodIMG={recipe.img} />
-                <h2>{recipe.name}</h2>
+                <h1>{recipe.name}</h1>
+                <h2>{recipe.menu}</h2>
               </Con>
             </Link>
           ))

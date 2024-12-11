@@ -15,6 +15,7 @@ ${reset}
 body{
     word-break:keep-all;
     letter-spacing: 1px;
+    font-family: "Noto Sans KR";
 }
 
 img{

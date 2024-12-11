@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PanIMG from "./imgs/panIMG.png";
 import Pan2IMG from "./imgs/pan2IMG.png";
 import cookIMG1 from "./imgs/cookIMG1.png";
+import { useState } from "react";
 
 const Container = styled.div`
   max-width: 440px;
@@ -84,12 +85,13 @@ const RecipeBtn = styled.div`
 `;
 
 const Home = () => {
+  const [level, setLevel] = useState("1");
   return (
     <Container>
       <Header />
       <Pan1>
         <img src={PanIMG} alt="후라이팬이미지" />
-        <h2>1Lv.</h2>
+        <h2>{level}Lv.</h2>
       </Pan1>
       <Pan2>
         <Link to={"/characterguide"}>
@@ -103,6 +105,7 @@ const Home = () => {
       </Pan2>
 
       <Character>
+        {level <= 3}
         <img src={cookIMG1} alt="요리사1단계" />
       </Character>
 
