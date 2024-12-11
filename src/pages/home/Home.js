@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PanIMG from "./imgs/panIMG.png";
 import Pan2IMG from "./imgs/pan2IMG.png";
 import cookIMG1 from "./imgs/cookIMG1.png";
-import { useState } from "react";
+import cookIMG2 from "./imgs/cookIMG2.png";
+import cookIMG3 from "./imgs/cookIMG3.png";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   max-width: 440px;
@@ -86,6 +88,21 @@ const RecipeBtn = styled.div`
 
 const Home = () => {
   const [level, setLevel] = useState("1");
+
+  useEffect(() => {
+    // 로컬 스토리지에서 데이터 가져오기
+    const savedData = JSON.parse(localStorage.getItem("userData"));
+    if (savedData && savedData.level) {
+      setLevel(savedData.level);
+    }
+  }, []);
+
+  const getCharacterImage = () => {
+    if (level <= 4) return cookIMG1;
+    if (level <= 9) return cookIMG2;
+    return cookIMG3;
+  };
+
   return (
     <Container>
       <Header />
@@ -105,8 +122,7 @@ const Home = () => {
       </Pan2>
 
       <Character>
-        {level <= 3}
-        <img src={cookIMG1} alt="요리사1단계" />
+        <img src={getCharacterImage()} alt={`요리사 ${level}단계`} />
       </Character>
 
       <RecipeBtn>

@@ -7,6 +7,7 @@ import foodIMG2 from "./imgs/foodIMG2.png";
 import foodIMG3 from "./imgs/foodIMG3.png";
 import foodIMG4 from "./imgs/foodIMG4.png";
 import foodIMG5 from "./imgs/foodIMG5.png";
+import foodIMG6 from "./imgs/foodIMG6.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -112,6 +113,12 @@ const List = () => {
       name: "[심슨]",
       menu: "슈가글레이즈 도넛",
       img: foodIMG5,
+    },
+    {
+      id: 6,
+      name: "[원피스]",
+      menu: "만화 고기",
+      img: foodIMG6,
     },
   ];
 

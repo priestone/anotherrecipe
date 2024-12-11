@@ -194,8 +194,16 @@ const Detail = () => {
   const [stampVisible, setStampVisible] = useState(false);
   const headerRef = useRef();
   const navigate = useNavigate();
+  const [level, setLevel] = useState(1); // 현재 레벨
+  const [stamps, setStamps] = useState(0); // 찍은 스탬프 수
 
   useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("userData"));
+    if (savedData) {
+      setLevel(savedData.level || 1);
+      setStamps(savedData.stamps || 0);
+    }
+
     const scrollHandler = () => {
       const pageY = window.scrollY;
       const current = headerRef.current;
@@ -245,6 +253,19 @@ const Detail = () => {
     });
   };
 
+  const handleStamp = () => {
+    const newStamps = stamps + 1;
+    const newLevel = Math.floor(newStamps / 1); // 1번 찍을 때마다 1레벨 증가
+    setStamps(newStamps);
+    setLevel(newLevel);
+
+    // 로컬 스토리지에 저장
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ level: newLevel, stamps: newStamps })
+    );
+  };
+
   return (
     <Container>
       <Header ref={headerRef}>
@@ -259,7 +280,7 @@ const Detail = () => {
       </Header>
 
       <Paper>
-        <Stamp visible={stampVisible}>
+        <Stamp visible={stampVisible} onClick={handleStamp}>
           <img src={stampIMG} alt="스탬프이미지" />
         </Stamp>
         <h1>재료</h1>
