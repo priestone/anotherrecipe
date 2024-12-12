@@ -3,12 +3,6 @@ import logoIMG from "./imgs/logoIMG.png";
 // import paperIMG from "./imgs/paperIMG.png";
 import paperIMG2 from "./imgs/paperIMG2.png";
 import stampIMG from "./imgs/stampIMG.png";
-import food1_1 from "./imgs/food1/food1_1.png";
-import food1_2 from "./imgs/food1/food1_2.png";
-import food1_3 from "./imgs/food1/food1_3.png";
-import food1_4 from "./imgs/food1/food1_4.png";
-import food1_5 from "./imgs/food1/food1_5.png";
-// import food3_1 from "./imgs/food3/food3_1.png";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
@@ -71,7 +65,7 @@ const Stamp = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: ${(props) => (props.visible ? "block" : "none")};
+  display: ${(props) => (props.$visible ? "block" : "none")};
 `;
 
 const Paper = styled.div`
@@ -191,17 +185,18 @@ const StepWrap = styled.div`
 
 const Detail = () => {
   const { id } = useParams();
-  const [stampVisible, setStampVisible] = useState(false);
+  const recipeId = parseInt(id, 10);
   const headerRef = useRef();
   const navigate = useNavigate();
-  const [level, setLevel] = useState(1); // 현재 레벨
-  const [stamps, setStamps] = useState(0); // 찍은 스탬프 수
+  const [userData, setUserData] = useState({
+    level: 0,
+    stampedRecipes: {},
+  });
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("userData"));
     if (savedData) {
-      setLevel(savedData.level || 1);
-      setStamps(savedData.stamps || 0);
+      setUserData(savedData);
     }
 
     const scrollHandler = () => {
@@ -231,7 +226,7 @@ const Detail = () => {
     return () => {
       window.removeEventListener("scroll", scrollHandler);
     };
-  });
+  }, []);
 
   const recipe = RecipeList.find((r) => r.id === parseInt(id));
   if (!recipe) {
@@ -242,10 +237,6 @@ const Detail = () => {
     navigate(-1);
   };
 
-  const toggleStamp = () => {
-    setStampVisible((prev) => !prev);
-  };
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -253,17 +244,25 @@ const Detail = () => {
     });
   };
 
-  const handleStamp = () => {
-    const newStamps = stamps + 1;
-    const newLevel = Math.floor(newStamps / 1); // 1번 찍을 때마다 1레벨 증가
-    setStamps(newStamps);
-    setLevel(newLevel);
+  const isStamped = userData.stampedRecipes?.[recipeId] || false;
 
-    // 로컬 스토리지에 저장
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({ level: newLevel, stamps: newStamps })
-    );
+  const handleToggleStamp = () => {
+    // 스탬프 상태 토글
+    const newStampedRecipes = {
+      ...userData.stampedRecipes,
+      [recipeId]: !isStamped,
+    };
+
+    // stampedRecipes 중 true인 값의 개수를 레벨로 설정
+    const newLevel = Object.values(newStampedRecipes).filter(Boolean).length;
+
+    const newUserData = {
+      level: newLevel,
+      stampedRecipes: newStampedRecipes,
+    };
+
+    setUserData(newUserData);
+    localStorage.setItem("userData", JSON.stringify(newUserData));
   };
 
   return (
@@ -280,7 +279,7 @@ const Detail = () => {
       </Header>
 
       <Paper>
-        <Stamp visible={stampVisible} onClick={handleStamp}>
+        <Stamp $visible={isStamped}>
           <img src={stampIMG} alt="스탬프이미지" />
         </Stamp>
         <h1>재료</h1>
@@ -299,7 +298,9 @@ const Detail = () => {
           </IngredientsWrap>
         ))}
       </Paper>
-      <ClearBtn onClick={toggleStamp}>습득완료</ClearBtn>
+      <ClearBtn onClick={handleToggleStamp}>
+        {isStamped ? "습득취소" : "습득완료"}
+      </ClearBtn>
       {recipe.youtube && (
         <VideoWrap>
           <iframe
@@ -320,7 +321,7 @@ const Detail = () => {
         {recipe.steps.map((step, index) => {
           const imagePath = require(`./imgs/food${recipe.id}/food${recipe.id}_${
             index + 1
-          }.png`);
+          }.jpg`);
           return (
             <StepWrap key={index}>
               <img src={imagePath} alt={`조리법 이미지 ${index + 1}`} />

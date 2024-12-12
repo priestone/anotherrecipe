@@ -6,9 +6,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PanIMG from "./imgs/panIMG.png";
 import Pan2IMG from "./imgs/pan2IMG.png";
-import cookIMG1 from "./imgs/cookIMG1.png";
-import cookIMG2 from "./imgs/cookIMG2.png";
-import cookIMG3 from "./imgs/cookIMG3.png";
+import cookimg1 from "./imgs/cookimg1.png";
+import cookimg2 from "./imgs/cookimg2.png";
+import cookimg3 from "./imgs/cookimg3.png";
 import { useEffect, useState } from "react";
 
 const Container = styled.div`
@@ -51,12 +51,31 @@ const Pan2 = styled.div`
   }
 `;
 
-const Character = styled.div`
-  width: 140px;
+const Character1 = styled.div`
+  /* width: 140px; */
   position: absolute;
-  top: 50%;
+  top: 57%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: ${(props) => (props.$visible ? "block" : "none")};
+`;
+
+const Character2 = styled.div`
+  width: 300px;
+  position: absolute;
+  top: 57%;
+  left: 40%;
+  transform: translate(-46%, -50%);
+  display: ${(props) => (props.$visible ? "block" : "none")};
+`;
+
+const Character3 = styled.div`
+  width: 360px;
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  transform: translate(-40%, -50%);
+  display: ${(props) => (props.$visible ? "block" : "none")};
 `;
 
 const RecipeBtn = styled.div`
@@ -97,12 +116,6 @@ const Home = () => {
     }
   }, []);
 
-  const getCharacterImage = () => {
-    if (level <= 4) return cookIMG1;
-    if (level <= 9) return cookIMG2;
-    return cookIMG3;
-  };
-
   return (
     <Container>
       <Header />
@@ -121,9 +134,17 @@ const Home = () => {
         </Link>
       </Pan2>
 
-      <Character>
-        <img src={getCharacterImage()} alt={`요리사 ${level}단계`} />
-      </Character>
+      <Character1 $visible={level <= 4}>
+        <img src={cookimg1} alt={`요리사 1단계`} />
+      </Character1>
+
+      <Character2 $visible={level >= 5 && level <= 9}>
+        <img src={cookimg2} alt={`요리사 2단계`} />
+      </Character2>
+
+      <Character3 $visible={level >= 10}>
+        <img src={cookimg3} alt={`요리사 3단계`} />
+      </Character3>
 
       <RecipeBtn>
         <Link to={"/list"}>

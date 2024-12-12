@@ -58,7 +58,7 @@ const Start = () => {
       <TextWrap>
         <img src={logoIMG} alt="로고이미지" />
       </TextWrap>
-      <Link to={"/home"}>
+      <Link to={"/guide"}>
         <StartBtn>
           <img src={startTEXT} alt="시작하기 버튼" />
         </StartBtn>

@@ -2,14 +2,14 @@ import styled from "styled-components";
 import Header from "../../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import foodIMG1 from "./imgs/foodIMG1.png";
-import foodIMG2 from "./imgs/foodIMG2.png";
-import foodIMG3 from "./imgs/foodIMG3.png";
-import foodIMG4 from "./imgs/foodIMG4.png";
-import foodIMG5 from "./imgs/foodIMG5.png";
-import foodIMG6 from "./imgs/foodIMG6.png";
+import foodimg1 from "./imgs/foodimg1.png";
+import foodimg2 from "./imgs/foodimg2.png";
+import foodimg3 from "./imgs/foodimg3.png";
+import foodimg4 from "./imgs/foodimg4.png";
+import foodimg5 from "./imgs/foodimg5.png";
+import foodimg6 from "./imgs/foodimg6.png";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
   max-width: 440px;
@@ -74,7 +74,7 @@ const Con = styled.div`
 const Conimg = styled.div`
   height: 150px;
 
-  background: url(${(props) => props.foodIMG}) no-repeat center / cover;
+  background: url(${(props) => props.$foodIMG}) no-repeat center / cover;
   /* overflow: hidden;
   img {
     width: 120%;
@@ -83,44 +83,55 @@ const Conimg = styled.div`
 
 const List = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [userData, setUserData] = useState({
+    level: 0,
+    stampedRecipes: {},
+  });
   const recipes = [
     {
       id: 1,
       name: "[쾌걸근육맨]",
       menu: "갈비찜덮밥",
-      img: foodIMG1,
+      img: foodimg1,
     },
     {
       id: 2,
       name: "[하울의 움직이는성]",
       menu: "하울 정식",
-      img: foodIMG2,
+      img: foodimg2,
     },
     {
       id: 3,
       name: "[요리왕 비룡]",
       menu: "황금 볶음밥",
-      img: foodIMG3,
+      img: foodimg3,
     },
     {
       id: 4,
       name: "[텔레토비]",
       menu: "스마일 쿠키",
-      img: foodIMG4,
+      img: foodimg4,
     },
     {
       id: 5,
       name: "[심슨]",
       menu: "슈가글레이즈 도넛",
-      img: foodIMG5,
+      img: foodimg5,
     },
     {
       id: 6,
       name: "[원피스]",
       menu: "만화 고기",
-      img: foodIMG6,
+      img: foodimg6,
     },
   ];
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("userData"));
+    if (savedData) {
+      setUserData(savedData);
+    }
+  }, []);
 
   const filteredRecipes = recipes.filter((recipe) =>
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -148,7 +159,7 @@ const List = () => {
           filteredRecipes.map((recipe) => (
             <Link to={`/detail/${recipe.id}`} key={recipe.id}>
               <Con>
-                <Conimg foodIMG={recipe.img} />
+                <Conimg $foodIMG={recipe.img} />
                 <h1>{recipe.name}</h1>
                 <h2>{recipe.menu}</h2>
               </Con>

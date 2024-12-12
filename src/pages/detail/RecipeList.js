@@ -151,7 +151,7 @@ export const RecipeList = [
       { name: "레몬즙", quantity: "2숟가락" },
       { name: "식용색소", quantity: "약간" },
     ],
-    youtube: "4BgE9K3cGt4",
+    youtube: null,
     origin: "만개의 레시피",
   },
 ];
