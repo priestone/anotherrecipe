@@ -143,6 +143,22 @@ const Box = styled.div`
   z-index: 100;
 `;
 
+const CloseBtn = styled.div`
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  z-index: 300;
+  color: black;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 700;
+  border-radius: 30px;
+`;
+
 const Characterguide = () => {
   return (
     <Container>
@@ -181,6 +197,9 @@ const Characterguide = () => {
           <h5>10Lv~</h5>
         </Character3>
       </CharacterWrap>
+      <Link to={"/home"}>
+        <CloseBtn>닫기</CloseBtn>
+      </Link>
 
       <RecipeBtn>
         <Link to={"/list"}>
