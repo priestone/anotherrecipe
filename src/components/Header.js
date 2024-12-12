@@ -12,11 +12,6 @@ const Container = styled.div`
   }
 `;
 
-const Logo = styled.div`
-  /* width: 100px; */
-  color: white;
-`;
-
 const Header = () => {
   return (
     <Container>

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import cookimg1 from "/sbs/anotherrecipe/src/pages/home/imgs/cookimg1.png";
-import PanIMG from "/sbs/anotherrecipe/src/pages/home/imgs/panIMG.png";
-import Pan2IMG from "/sbs/anotherrecipe/src/pages/home/imgs/pan2IMG.png";
-import recipeTEXT from "/sbs/anotherrecipe/src/pages/home/imgs/recipeTEXT.png";
+import cookimg1 from "../home/imgs/cookimg1.png";
+import PanIMG from "../home/imgs/panIMG.png";
+import Pan2IMG from "../home/imgs/pan2IMG.png";
+import recipeTEXT from "../home/imgs/recipeTEXT.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -94,6 +94,7 @@ const LevelNotice = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100;
   h4 {
     color: black;
     text-align: center;
@@ -126,7 +127,7 @@ const Box = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
 `;
 
 const BtnNotice = styled.div`

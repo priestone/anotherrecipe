@@ -154,4 +154,26 @@ export const RecipeList = [
     youtube: null,
     origin: "만개의 레시피",
   },
+  {
+    id: 7,
+    title: "[아따맘마]-낫또 피자 토스트",
+    steps: [
+      "식빵 위에 (잘 저어 거미줄이 잔뜩 생긴) 낫또를 올린다.",
+      "깍둑썰기한 토마토를 그 위에 올리고 케첩을 뿌려준다.",
+      "모차렐라 치즈를 얹어준다.그리고 토스트기 또는 오븐에 (200도) 5분간 구워준다.",
+      "가다랑어포를 위에 올려 마무리한다.",
+    ],
+    ingredients: [
+      { name: "식빵", quantity: "1개" },
+      { name: "낫또", quantity: "1개" },
+      { name: "토마토", quantity: "1/3개" },
+    ],
+    seasonings: [
+      { name: "케첩", quantity: "적당량" },
+      { name: "모차렐라 치즈", quantity: "1장" },
+      { name: "가다랑어포", quantity: "약간" },
+    ],
+    youtube: "nhG8WrYa2VE",
+    origin: "무비키친anime cook",
+  },
 ];

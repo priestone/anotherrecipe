@@ -8,6 +8,7 @@ import foodimg3 from "./imgs/foodimg3.png";
 import foodimg4 from "./imgs/foodimg4.png";
 import foodimg5 from "./imgs/foodimg5.png";
 import foodimg6 from "./imgs/foodimg6.png";
+import foodimg7 from "./imgs/foodimg7.jpg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -46,6 +47,7 @@ const SearchBtn = styled.button`
 
 const ConWrap = styled.div`
   width: 100%;
+  min-height: 600px;
   /* height: 600px; */
   margin-top: 60px;
   /* background-color: salmon; */
@@ -81,12 +83,17 @@ const Conimg = styled.div`
   } */
 `;
 
+const NoSearch = styled.div`
+  height: 700px;
+`;
+
 const List = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [userData, setUserData] = useState({
     level: 0,
     stampedRecipes: {},
   });
+
   const recipes = [
     {
       id: 1,
@@ -124,6 +131,12 @@ const List = () => {
       menu: "만화 고기",
       img: foodimg6,
     },
+    {
+      id: 7,
+      name: "[아따맘마]",
+      menu: "낫또 피자 토스트",
+      img: foodimg7,
+    },
   ];
 
   useEffect(() => {
@@ -133,9 +146,14 @@ const List = () => {
     }
   }, []);
 
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  console.log(userData);
+  const filteredRecipes = recipes.filter((recipe) => {
+    const lowerName = recipe.name.toLowerCase();
+    const lowerMenu = recipe.menu.toLowerCase();
+    const lowerSearch = searchTerm.toLowerCase();
+
+    return lowerName.includes(lowerSearch) || lowerMenu.includes(lowerSearch);
+  });
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value); // 검색어 상태 업데이트
@@ -166,15 +184,17 @@ const List = () => {
             </Link>
           ))
         ) : (
-          <h2
-            style={{
-              color: "white",
-              textAlign: "center",
-              gridColumn: "span 2",
-            }}
-          >
-            검색 결과가 없습니다.
-          </h2>
+          <NoSearch>
+            <h2
+              style={{
+                color: "white",
+                textAlign: "center",
+                gridColumn: "span 2",
+              }}
+            >
+              검색 결과가 없습니다.
+            </h2>
+          </NoSearch>
         )}
       </ConWrap>
     </Container>
@@ -182,12 +202,3 @@ const List = () => {
 };
 
 export default List;
-
-// {recipes.map((recipe) => (
-//   <Link to={`/detail/${recipe.id}`} key={recipe.id}>
-//     <Con>
-//       <Conimg foodIMG={recipe.img} />
-//       <h2>{recipe.name}</h2>
-//     </Con>
-//   </Link>
-// ))}

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
-import PanIMG from "/sbs/anotherrecipe/src/pages/home/imgs/panIMG.png";
-import Pan2IMG from "/sbs/anotherrecipe/src/pages/home/imgs/pan2IMG.png";
-import cookimg1 from "/sbs/anotherrecipe/src/pages/home/imgs/cookimg1.png";
-import cookimg2 from "/sbs/anotherrecipe/src/pages/home/imgs/cookimg2.png";
-import cookimg3 from "/sbs/anotherrecipe/src/pages/home/imgs/cookimg3.png";
-import recipeTEXT from "/sbs/anotherrecipe/src/pages/home/imgs/recipeTEXT.png";
+import PanIMG from "../home/imgs/panIMG.png";
+import Pan2IMG from "../home/imgs/pan2IMG.png";
+import cookimg1 from "../home/imgs/cookimg1.png";
+import cookimg2 from "../home/imgs/cookimg2.png";
+import cookimg3 from "../home/imgs/cookimg3.png";
+import recipeTEXT from "../home/imgs/recipeTEXT.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
@@ -147,7 +147,7 @@ const CloseBtn = styled.div`
   width: 100px;
   height: 50px;
   position: absolute;
-  top: 70%;
+  top: 72%;
   left: 50%;
   background-color: white;
   transform: translate(-50%, -50%);
