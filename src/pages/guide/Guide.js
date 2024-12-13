@@ -136,7 +136,7 @@ const BtnNotice = styled.div`
   background-color: white;
   position: absolute;
   left: 5%;
-  bottom: 22%;
+  bottom: 24%;
   border-radius: 10px;
   display: flex;
   align-items: center;

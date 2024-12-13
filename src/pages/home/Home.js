@@ -94,7 +94,7 @@ const Character2 = styled.div`
   width: 60%;
   position: absolute;
   top: 57%;
-  left: 40%;
+  left: 50%;
   display: ${(props) => (props.$visible ? "block" : "none")};
   animation: ${moveAni2} 0.7s alternate infinite;
 `;
@@ -102,8 +102,8 @@ const Character2 = styled.div`
 const Character3 = styled.div`
   width: 70%;
   position: absolute;
-  top: 50%;
-  left: 43%;
+  top: 54%;
+  left: 50%;
   display: ${(props) => (props.$visible ? "block" : "none")};
   animation: ${moveAni3} 0.7s alternate infinite;
 `;
