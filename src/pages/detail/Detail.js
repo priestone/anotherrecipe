@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import logoIMG from "./imgs/logoIMG.png";
 // import paperIMG from "./imgs/paperIMG.png";
 import paperIMG2 from "./imgs/paperIMG2.png";
@@ -42,6 +42,11 @@ const BackBtn = styled.div`
   align-items: center;
   color: white;
   font-size: 22px;
+  margin-right: 80px;
+
+  @media screen and (max-width: 400px) {
+    margin-right: 50px;
+  }
 `;
 
 const Logo = styled.div`
@@ -60,19 +65,36 @@ const Logo = styled.div`
   }
 `;
 
+const stampAni = keyframes`
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+`;
+
 const Stamp = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: ${(props) => (props.$visible ? "block" : "none")};
+  opacity: ${(props) => (props.$visible ? 1 : 0)};
+  animation: ${(props) => (props.$visible ? stampAni : "none")} 0.7s ease
+    forwards;
 `;
 
 const Paper = styled.div`
   width: 100%;
   height: 600px;
   background: url(${paperIMG2}) no-repeat center / contain;
-  padding: 15% 50px 20% 50px;
+  padding: 70px 50px 20% 50px;
   position: relative;
   margin-top: 30px;
 
@@ -88,6 +110,27 @@ const Paper = styled.div`
     margin-top: 30px;
     margin-bottom: 10px;
   }
+
+  @media screen and (max-width: 400px) {
+    padding: 110px 50px 20% 50px;
+
+    h1 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 900;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      font-size: 14px;
+    }
+  }
 `;
 
 const IngredientsWrap = styled.div`
@@ -99,12 +142,18 @@ const IngredientsWrap = styled.div`
   h3 {
     line-height: 30px;
   }
+
+  @media screen and (max-width: 400px) {
+    h3 {
+      line-height: 20px;
+    }
+  }
 `;
 
 const ClearBtn = styled.div`
   width: 200px;
   height: 40px;
-  background-color: white;
+  /* background-color: white; */
   color: black;
   margin: 0 auto;
   border-radius: 50px;
@@ -112,6 +161,7 @@ const ClearBtn = styled.div`
   line-height: 40px;
   margin-top: 30px;
   margin-bottom: 50px;
+  background-color: ${(props) => (props.$visible ? "#dd7373" : "#5db35d")};
 `;
 
 const RecipeWrap = styled.div`
@@ -298,7 +348,7 @@ const Detail = () => {
           </IngredientsWrap>
         ))}
       </Paper>
-      <ClearBtn onClick={handleToggleStamp}>
+      <ClearBtn onClick={handleToggleStamp} $visible={isStamped}>
         {isStamped ? "습득취소" : "습득완료"}
       </ClearBtn>
       {recipe.youtube && (

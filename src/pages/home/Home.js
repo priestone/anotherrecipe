@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Header from "../../components/Header";
 import { Link } from "react-router-dom";
 import recipeTEXT from "./imgs/recipeTEXT.png";
@@ -51,31 +51,61 @@ const Pan2 = styled.div`
   }
 `;
 
+const moveAni1 = keyframes`
+0%{
+transform:translate(-50%,-60%);
+}
+100%{
+  transform:translate(-50%,-58%);
+
+}
+`;
+
+const moveAni2 = keyframes`
+0%{
+transform:translate(-60%,-60%);
+}
+100%{
+  transform:translate(-60%,-58%);
+
+}
+`;
+
+const moveAni3 = keyframes`
+0%{
+transform:translate(-58%,-60%);
+}
+100%{
+  transform:translate(-58%,-58%);
+
+}
+`;
+
 const Character1 = styled.div`
-  /* width: 140px; */
+  width: 50%;
   position: absolute;
   top: 57%;
   left: 50%;
-  transform: translate(-50%, -50%);
   display: ${(props) => (props.$visible ? "block" : "none")};
+  animation: ${moveAni1} 0.7s alternate infinite;
 `;
 
 const Character2 = styled.div`
-  width: 300px;
+  width: 60%;
   position: absolute;
   top: 57%;
   left: 40%;
-  transform: translate(-46%, -50%);
   display: ${(props) => (props.$visible ? "block" : "none")};
+  animation: ${moveAni2} 0.7s alternate infinite;
 `;
 
 const Character3 = styled.div`
-  width: 360px;
+  width: 70%;
   position: absolute;
   top: 50%;
   left: 43%;
-  transform: translate(-40%, -50%);
   display: ${(props) => (props.$visible ? "block" : "none")};
+  animation: ${moveAni3} 0.7s alternate infinite;
 `;
 
 const RecipeBtn = styled.div`
