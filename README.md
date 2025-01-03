@@ -2,7 +2,7 @@
 
 ## 🔗 배포주소
 
-https://priestone.github.io/storycut/
+https://priestone.github.io/anotherrecipe/
 
 ## 📁 프로젝트 소개
 
